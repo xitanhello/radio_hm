@@ -1,0 +1,225 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage[UTF8, fontset=none]{ctex} % 禁用默认字体
+\usepackage{fontspec}
+\usepackage{graphicx}
+\setmainfont{Noto Sans CJK SC}
+\usepackage{booktabs}
+\usepackage{array}    % 列格式调整
+\usepackage{xcolor}   % 颜色控制（可选）
+\usepackage{geometry} % 页面边距设置
+
+\title{Summaries of Papers}
+\author{Xitan}
+
+\begin{document}
+\maketitle
+\section{The radio environment of the 21 Centimeter Array:RFI detection and mitigation}
+\subsection{研究背景与目标}
+\subsubsection{科学意义}
+\begin{itemize}
+    \item 探测宇宙黎明（\textbf{Cosmic Dawn}）和再电离时代（\textbf{EoR}）是低频射电天文学的核心目标
+    \item 通过中性氢21cm信号（微弱，约$1$-$10\,\mathrm{mK}$）揭示早期宇宙结构演化
+\end{itemize}
+
+\subsubsection{技术挑战}
+\begin{itemize}
+    \item 低频射电观测（$50$-$200\,\mathrm{MHz}$）面临强射频干扰（\textbf{RFI}）
+    \item 干扰源包括：
+    \begin{itemize}
+        \item 地面人为干扰（FM广播、卫星通信）
+        \item 天空源（银河系/河外射电源旁瓣泄漏、栅瓣）
+    \end{itemize}
+    \item \textbf{RFI抑制}是数据处理的\textbf{首要步骤}
+\end{itemize}
+
+\subsection{RFI检测与抑制方法}
+\subsubsection{地面RFI处理(标记直接剔除)}
+\subsubsection{统计阈值法}
+\begin{itemize}
+    \item \textbf{原理}：热噪声与宇宙信号服从高斯分布，RFI为非高斯异常
+    \item \textbf{实施}：
+    \begin{itemize}
+        \item 计算频率通道均值$\mu$和标准差$\sigma$
+        \item 剔除超过阈值（如$3\sigma$-$7\sigma$）的数据点
+        \item 高频污染通道（如$137\,\mathrm{MHz}$卫星信号）采用严格阈值
+    \end{itemize}
+    \item \textbf{效果}：
+    \begin{itemize}
+        \item RFI占用率在$115$-$163\,\mathrm{MHz}$为$2.66\%$
+        \item 与LOFAR（$3.18\%$）、MWA（$1.65\%$）相当
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{可见度相关系数}
+\begin{itemize}
+    \item \textbf{定义}：
+    $$
+    p_{ij} = \frac{V_{ij}}{\sqrt{V_{ii}V_{jj}}}
+    $$
+    \item \textbf{优势}：抑制同时出现在分子分母的强RFI
+    \item \textbf{实时处理}：
+    \begin{itemize}
+        \item 效率降低$22\%$
+        \item 数据离散度显著减小
+    \end{itemize}
+\end{itemize}
+
+\subsection{天空RFI处理}
+\begin{itemize}
+    \item \textbf{旁瓣泄漏}：21CMA规则天线间距导致
+    \begin{itemize}
+        \item 主要污染源：天鹅座A（Cygnus A）银道面每天会扫过北天极区域一次，这使得银河系的辐射每天通过两个旁瓣两次进入21CMA的视场。
+    \end{itemize}
+    \item \textbf{栅瓣}：21CMA规则天线间距导致栅瓣（grating sidelobes）
+        \begin{itemize}
+            \item 等间距的圆环的空间响应几乎与主瓣相当，如果它们“看
+到”银河系和河外射电源，就会对我们的观测造成严重干扰。例如两个强射电源：天鹅座A（Cygnus A）和仙后座A（Cas A）。
+            \end{itemize}
+    \item \textbf{解决方案}：识别污染时间窗口，结合CLEAN算法建模
+\end{itemize}
+
+
+\subsection{实验结果与验证}
+\begin{itemize}
+    \item \textbf{灵敏度验证}：系统噪声按$t^{-1/2}$下降
+    \item \textbf{数据质量}：
+    \begin{itemize}
+        \item RFI抑制后可见度功率谱反映银河系辐射轮廓
+        \item 经过射频干扰抑制后旁瓣泄漏的两个强射电源任然有影响
+    \end{itemize}
+\end{itemize}
+
+\subsection{结论}
+尽管对rfi的处理和剔除是比较好的，但是没有考虑更复杂的的dde影响，其次由于分辨率、灵敏度不够高对于弱射电源的搜寻和处理都带来了极大困难，并且由于阵列的规则排列对于强射电源会带来傍瓣、栅瓣的影响难以扣除。
+
+
+\section{Radio Sources in the NCP Region Observed with the 21 Centimeter Array}
+\subsection{背景}
+本文基于21厘米阵列（21CMA）对北天极（NCP）区域的12小时观测数据，构建了包含624个射电源的目录，覆盖频率75-175 MHz，角分辨率$\sim 4'$。通过限制东西向基线（$L < 1500$ m）降低电离层效应影响，源探测灵敏度达0.1 Jy。分析显示源计数在$\sim 1$ Jy以下趋于平缓，与GMRT及MWA观测结果一致。研究发现，校准误差及亮源（如3C061.1）栅瓣是限制成像动态范围（$\sim 10^4$）的主要因素。本文结果为SKA等下一代低频干涉仪的设计提供了关键参考。
+\subsection{引言}
+低频射电观测（$\nu \leq 300$ MHz）对研究河外射电统计特性及再电离时期（EoR）信号至关重要。北天极区域因全天候可观测特性，成为21CMA、LOFAR等阵列的重点目标。本文通过21CMA观测数据，首次系统分析NCP区域射电源分布特性，探讨低频干涉成像的技术挑战。
+
+\subsection{方法与观测细节}
+\subsubsection{21CMA阵列配置}
+\begin{itemize}
+    \item \textbf{硬件：} 81个站点，10287个对数周期天线，东西基线6.1 km，南北4 km，固定指向NCP。
+    \item \textbf{参数：} 频率50-200 MHz，角分辨率$\sim 3'$（200 MHz），系统噪声温度$\sim 40$ K。
+    \item \textbf{数据处理：} GPU加速相关运算，12.5 MHz子波段成像，Hogbom CLEAN反卷积。
+\end{itemize}
+
+\subsubsection{关键步骤}
+\begin{itemize}
+    \item \textbf{RFI抑制：} 结合阈值剔除（3$\sigma$）与高斯统计过滤，保留97\%数据。
+    \item \textbf{自校准：（自校准和闭合关系）} 基于10个亮源（如3C061.1，$S_{150\,\text{MHz}} = 33$ Jy）每小时相位校正。
+    \item \textbf{成像：}
+    \begin{table}[htbp]
+\centering
+\caption{射电干涉成像处理参数与影响}
+\label{tab:radio_imaging}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{步骤} & \textbf{参数/方法} & \textbf{作用与影响} \\
+\midrule
+基线筛选 & 
+$100\,\text{m} \leq L \leq 1500\,\text{m}$ & 
+抑制电离层扰动，优化uv覆盖完整性，降低噪声。 \\
+\addlinespace
+
+网格化 & 
+$4096^2$网格 + 均匀加权 & 
+高分辨率uv采样，但可能引入栅瓣伪影（需反卷积校正）。 \\
+\addlinespace
+
+反卷积 & 
+Högbom算法（增益0.05） & 
+去除点源旁瓣，残留伪影水平依赖迭代深度与终止条件。 \\
+\addlinespace
+
+频率合并 & 
+$\SI{1.56}{\mega\hertz}$子带 & 
+平衡频率分辨率与灵敏度，抑制热噪声（$\alpha \Delta \nu^{-1/2}$）。 \\
+\addlinespace
+
+视场裁剪 & 
+中心$14^\circ \times 14^\circ$ & 
+聚焦科学目标区域，避免边缘效应（如波束畸变）。 \\
+\bottomrule
+\end{tabular}
+\end{table}
+    
+    \item \textbf{波束建模：} 高斯近似主波束$\theta_b = 3.58^\circ (\nu/100\,\text{MHz})^{-1.21}$，验证增益$G \propto \nu^2$。
+\end{itemize}
+
+\subsection{关键结果}
+\subsubsection{源选择}
+\begin{itemize}
+    \item 当前方法：要求候选源在至少4个子波段（共8个）中满足峰值流量$S_p$≥5$\sigma$（局部噪声阈值），并结合空间位置一致性验证（偏移≤3′）。
+    \item 全子波段放宽法（极端情况）：候选源在任意子波段中满足$\ S_p≥3σ$即保留。
+    \item 相邻通道关联法：利用旁瓣的频率依赖性（旁瓣位置随频率偏$\propto \nu^{-1}$ )，仅保留在相邻子波段($\Delta \nu = 24.4 kHz$)中同时出现的候选源
+\end{itemize}
+
+\subsubsection{源目录与特性}
+\begin{itemize}
+\item 探测624个射电源（半径$5^\circ$内）
+\item 交叉验证：490个源与6C巡天一致（$>0.1$ Jy）
+\item 光谱指数分布：
+  \begin{equation}
+    \alpha = -0.8\ (\text{峰值}),\quad \alpha_{\text{高频}} \sim -1.25
+  \end{equation}
+\end{itemize}
+
+\subsubsection{源计数特性}
+\begin{equation}
+\frac{dN}{dS} = 
+\begin{cases}
+k_1 S^{-\gamma_1}, & S < S_0 \\
+k_2 S^{-\gamma_2}, & S \geq S_0
+\end{cases}
+\end{equation}
+其中$\gamma_1=1.59$（GMRT），$\gamma_2=2.1-2.55$。
+
+\subsection{噪声分析}
+我们现在分析朝向北天极(NCP)区域的干涉成像中的噪声，主要有四个来源:热噪声、混淆噪声、校准误差和解卷积误差。
+\begin{itemize}
+    \item 热噪声: $$s_{the} = \frac{ \sqrt{2} k_B T_{sys}} {A_{eff} \eta \sqrt{\Delta\nu \Delta t}}$$
+    \item 混淆噪声:
+    \begin{equation}
+    \sigma_{c}^{2} = \Omega_{b} \int_{0}^{S_{\text{lim}}} \frac{dN}{dS} S^{2} \, dS
+    \label{eq:sigma_squared}
+    \end{equation}
+    \item 校准误差和解卷积误差: 事实上，$S_{lim}$除了受望远镜分辨率影响外，还受校准误差和反卷积误差的共同控制。目前的成像算法尚未考虑电离层效应，不过如果将时间步长选择在几分钟以内，或者仅使用短基线，自校准可能会部分校正该效应。在几分钟的时间尺度上进行校准非常耗时，因为还需要在每个频率通道上进行校正。此外，21CMA(21厘米射电阵列)众多冗余基线产生的栅瓣，会在像B004713+891245和3C061.1 这样的亮源周围形成非常明显、等间距的圆环。目前，在反卷积处理中完全去除这些环状结构仍然很困难。
+\end{itemize}
+
+\subsection{讨论与启示}
+\subsubsection{技术挑战}
+\begin{itemize}
+\item 亮源处理：3C061.1残留栅瓣导致$10^4$动态范围限制
+\item 弱源处理：分辨率的限制导致的混淆效应，导致的源计算不完整性，同时对于扩展源的识别和处理也极具挑战 
+\item 电离层扰动：短基线（$L<1500$ m）相位误差公式：
+  \begin{equation}
+    \Delta\phi \propto L\cdot\nabla N_e\cdot\nu^{-1}
+  \end{equation}
+\end{itemize}
+
+\subsubsection{对SKA的启示}
+\begin{table}[ht]
+\centering
+\caption{下一代阵列设计建议}
+\label{tab:skalow}
+\begin{tabular}{@{}ll@{}}
+\toprule
+参数 & 推荐方案 \\
+\midrule
+基线布局 & 混合长短基线（随机分布抑制栅瓣） \\
+校准策略 & 冗余基线+实时GNSS TEC监测 \\
+成像算法 & w-term aware CLEAN \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{结论}
+成功构建NCP射电源目录，验证低频源计数平缓趋势，当前限制因素：校准误差（占噪声贡献68\%）和反卷积残留，目前电离层效应和亮扩展源带来的校准误差很难处理,以及天区内和天区外强射电源的栅瓣和旁瓣。由于灵敏度不够高识别微弱射电源困难导致的混淆效应。
+
+\end{document}
